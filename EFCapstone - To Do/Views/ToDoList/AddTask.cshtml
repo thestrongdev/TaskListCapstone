@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model EFCapstone___To_Do.Models.ToDoList.AddTaskViewModel
+
+<form asp-controller="ToDoList" asp-action="TaskList" method="post">
+
+    <br />
+
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+    </div>
+
+    <div>
+        <label asp-for="DueDate"></label>
+        <input asp-for="DueDate" />
+    </div>
+
+    <br />
+
+    <button class="btn btn-dark">ADD TASK</button>
+
+</form>
