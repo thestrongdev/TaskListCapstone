@@ -35,6 +35,9 @@ namespace EFCapstone___To_Do.Migrations
                     b.Property<string>("IsDone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("taskID");
 
                     b.ToTable("Tasks");

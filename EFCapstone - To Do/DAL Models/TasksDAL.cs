@@ -18,5 +18,8 @@ namespace EFCapstone___To_Do.DAL_Models
 
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
+
+        [ForeignKey("Users")]
+        public int UserID { get; set; }
     }
 }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace EFCapstone___To_Do.Models.ToDoList
 {
-    public class TaskListViewModel : Task
+    public class TaskListViewModel : TaskItem
     {
-        public List<Task> Tasks { get; set; }
+        public List<TaskItem> Tasks { get; set; }
     }
 }

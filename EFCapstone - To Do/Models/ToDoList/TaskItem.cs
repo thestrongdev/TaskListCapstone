@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFCapstone___To_Do.Models.ToDoList
 {
-    public class Task
+    public class TaskItem
     {
         [Required]
         public string Description { get; set; }
@@ -17,6 +17,9 @@ namespace EFCapstone___To_Do.Models.ToDoList
         [Required]
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
+
+        public int TaskID { get; set; }
+        public int UserID { get; set; }
 
     }
 }

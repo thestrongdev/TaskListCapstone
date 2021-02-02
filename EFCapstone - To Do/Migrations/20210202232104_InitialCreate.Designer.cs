@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCapstone___To_Do.Migrations
 {
     [DbContext(typeof(ToDoListDBContext))]
-    [Migration("20210202023148_InitialCreate")]
+    [Migration("20210202232104_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,9 @@ namespace EFCapstone___To_Do.Migrations
 
                     b.Property<string>("IsDone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("taskID");
 
