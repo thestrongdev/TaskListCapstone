@@ -7,6 +7,6 @@ namespace EFCapstone___To_Do.Models.ToDoList
 {
     public class AddTaskViewModel : TaskItem
     {
-       
+        public bool IsChecked { get; set; }
     }
 }

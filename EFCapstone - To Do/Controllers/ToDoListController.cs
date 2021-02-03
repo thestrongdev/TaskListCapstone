@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
-    //make sure "IsDone" property is feeding to database correctly
     //make it look pretty?
 
 
