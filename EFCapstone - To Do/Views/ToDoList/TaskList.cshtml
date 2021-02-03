@@ -7,6 +7,10 @@
 @model EFCapstone___To_Do.Models.ToDoList.TaskListViewModel
 <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" />
 
+
+<h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
+
+<div>
 @{
     foreach (var task in Model.Tasks)
     {
@@ -22,3 +26,4 @@
 
     }
 }
+    </div>

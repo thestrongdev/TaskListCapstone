@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace EFCapstone___To_Do.Models.ToDoList
 {
-    public class TaskListViewModel : TaskItem
+    public class ErrorPageViewModel
     {
-        public List<TaskItem> Tasks { get; set; }
-
-        public string UserAccount { get; set; }
     }
 }

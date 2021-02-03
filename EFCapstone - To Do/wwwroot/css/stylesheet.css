@@ -5,3 +5,11 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     text-align: center;
 }
+
+#error{
+    color: red;
+}
+
+h2{
+    color: blue;
+}

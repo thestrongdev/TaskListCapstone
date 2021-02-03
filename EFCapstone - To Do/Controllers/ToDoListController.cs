@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
+    //route to error page if user clicks task lisk and not logged in
     //make it look pretty?
 
 
@@ -61,6 +62,7 @@ namespace EFCapstone___To_Do.Controllers
                     _currentUser.CurrentUser.Email = model.Email;
                     _currentUser.CurrentUser.Password = model.Password;
                     _currentUser.CurrentUser.UserID = user.userID;
+                    _currentUser.loggedIn = true;
                     return View(); 
                 }
 
@@ -72,8 +74,17 @@ namespace EFCapstone___To_Do.Controllers
 
         public IActionResult AddTask()
         {
+
+            if (_currentUser.loggedIn == false)
+            {
+                var errorModel = new ErrorPageViewModel();
+                return View("ErrorPage", errorModel);
+            }
+
+
             var model = new AddTaskViewModel();
             model.DueDate = DateTime.Now;
+            model.UserAccount = _currentUser.CurrentUser.Email;
             return View(model);
         }
 
@@ -81,6 +92,18 @@ namespace EFCapstone___To_Do.Controllers
         //ONLY GET TO THIS ACTION AFTER ADDING A TASK
         public IActionResult TaskList(AddTaskViewModel model)
         {
+
+            //TO ACCESS TASK LIST VIEW FROM THE HEADER LINK (rather than routing from ADD TASK VIEW
+            if (_currentUser.loggedIn == false)
+            {
+                var errorModel = new ErrorPageViewModel();
+                return View("ErrorPage", errorModel);
+            }
+
+            //if (model == null)
+            //{
+            //    return View();
+            //}
  
             //BELOW ADDS THE TASK SUBMITTED FROM THE ADD TASK VIEW
             var newTask = new TasksDAL();
@@ -109,6 +132,8 @@ namespace EFCapstone___To_Do.Controllers
                 TaskID = tasksDAL.taskID
 
             }).ToList();
+
+            viewModel.UserAccount = _currentUser.CurrentUser.Email;
 
             return View(viewModel);
         }
