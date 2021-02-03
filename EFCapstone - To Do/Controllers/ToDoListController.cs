@@ -78,6 +78,7 @@ namespace EFCapstone___To_Do.Controllers
         }
 
        
+        //ONLY GET TO THIS ACTION AFTER ADDING A TASK
         public IActionResult TaskList(AddTaskViewModel model)
         {
  
@@ -96,6 +97,7 @@ namespace EFCapstone___To_Do.Controllers
             _toDoListDBContext.SaveChanges();
 
             //ASSEMBLE THE LIST OF TASKS ASSOCIATED WITH THE USER'S ID
+            //CAN ALSO BE PUT INTO FUNCTION
             var viewModel = new TaskListViewModel();
             var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
 
@@ -111,6 +113,21 @@ namespace EFCapstone___To_Do.Controllers
             return View(viewModel);
         }
 
+        public IActionResult MarkComplete(int id)
+        {
+
+            //GET CORRECT ITEM FROM DATABASE
+            var taskItem = GetTaskWhereIDIsFirstORDefault(id);
+            var taskDAL = _toDoListDBContext.Tasks
+                .First(taskDAL => taskDAL.taskID == taskItem.TaskID);
+
+            taskDAL.IsDone = "YES";
+            _toDoListDBContext.SaveChanges();
+
+            //WE WANT TO CREATE A NEW LIST OF TASKS TO DISPLAY AFTER UPDATING STATUS ---PUT BELOW IN A FUNCTION!!!
+            return ListItems(id);
+        }
+
         public IActionResult DeleteItem(int id) 
         {
             
@@ -122,17 +139,12 @@ namespace EFCapstone___To_Do.Controllers
             _toDoListDBContext.SaveChanges();
 
             //WE WANT TO CREATE A NEW LIST OF TASKS TO DISPLAY AFTER DELETING
-            var viewModel = new TaskListViewModel();
-            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
-
-            var taskViewModelList = tasks
-                .Select(taskDAL => new TaskItem { Description = taskDAL.Description, DueDate = taskDAL.DueDate, TaskID = taskDAL.taskID, UserID = taskDAL.UserID }).ToList();
-
-            viewModel.Tasks = taskViewModelList;
-
-            return View("TaskList", viewModel);
+            return ListItems(id);
         }
 
+
+
+        //FUNCTIONS FOR REPEATED BLOCKS OF CODE
         private TaskItem GetTaskWhereIDIsFirstORDefault(int id)
         {
             TasksDAL taskDAL = _toDoListDBContext.Tasks
@@ -146,6 +158,19 @@ namespace EFCapstone___To_Do.Controllers
             task.UserID = taskDAL.UserID;
 
             return task;
+        }
+
+        private ViewResult ListItems(int id)
+        {
+            var viewModel = new TaskListViewModel();
+            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
+
+            var taskViewModelList = tasks
+                .Select(taskDAL => new TaskItem { Description = taskDAL.Description, DueDate = taskDAL.DueDate, TaskID = taskDAL.taskID, UserID = taskDAL.UserID, IsDone = taskDAL.IsDone}).ToList();
+
+            viewModel.Tasks = taskViewModelList;
+
+            return View("TaskList", viewModel);
         }
 
     }

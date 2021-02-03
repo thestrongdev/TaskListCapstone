@@ -5,14 +5,20 @@
 }
 
 @model EFCapstone___To_Do.Models.ToDoList.TaskListViewModel
-
+<link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" />
 
 @{
     foreach (var task in Model.Tasks)
     {
+    <div>
         <p>Description: @task.Description</p>
         <p>Due Date: @task.DueDate</p>
-        <p>Complete? @task.IsDone</p>
-        <a class="text-danger" asp-controller="ToDoList" asp-action="DeleteItem" asp-route-id="@task.TaskID">Delete Task</a>
+        <p>Complete Status: @task.IsDone</p>
+
+        <div><a class="text-info" asp-controller="ToDoList" asp-action="MarkComplete" asp-route-id="@task.TaskID">Mark Item Complete</a></div>
+        <div><a class="text-danger" asp-controller="ToDoList" asp-action="DeleteItem" asp-route-id="@task.TaskID">Delete Task</a></div>
+        <br/>
+    </div>
+
     }
 }
