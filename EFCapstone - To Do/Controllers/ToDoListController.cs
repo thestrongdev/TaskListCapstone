@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
-    //Fix duedate function as it starts at year "0001"
     //make sure "IsDone" property is feeding to database correctly
     //make it look pretty?
 
@@ -74,7 +73,9 @@ namespace EFCapstone___To_Do.Controllers
 
         public IActionResult AddTask()
         {
-            return View();
+            var model = new AddTaskViewModel();
+            model.DueDate = DateTime.Now;
+            return View(model);
         }
 
        
