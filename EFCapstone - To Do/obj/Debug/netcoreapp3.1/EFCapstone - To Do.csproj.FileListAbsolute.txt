@@ -82,3 +82,5 @@ C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netc
 C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netcoreapp3.1\EFCapstone - To Do.dll
 C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netcoreapp3.1\EFCapstone - To Do.pdb
 C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netcoreapp3.1\EFCapstone - To Do.genruntimeconfig.cache
+C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netcoreapp3.1\Razor\Views\ToDoList\SuccessfulLogIn.cshtml.g.cs
+C:\Users\goods\source\repos\EFCapstone - To Do\EFCapstone - To Do\obj\Debug\netcoreapp3.1\Razor\Views\ToDoList\ThankYou.cshtml.g.cs

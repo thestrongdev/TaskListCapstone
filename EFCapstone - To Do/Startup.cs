@@ -1,4 +1,5 @@
 using EFCapstone___To_Do.Models.ToDoList;
+using EFCapstone___To_Do.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,8 @@ namespace EFCapstone___To_Do
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ICurrentUser, TheCurrentUser>();
+
             services.AddDbContext<ToDoListDBContext>(options =>
             {
                 var connectionString = Configuration.GetConnectionString("DefaultConnection");

@@ -20,8 +20,22 @@
         <input asp-for="DueDate" />
     </div>
 
-    <br />
+    <div>
+        <label>TASK COMPLETE? </label><span></span>
 
-    <button class="btn btn-dark">ADD TASK</button>
+        <label asp-for ="IsDone" class="form-check-inline">
+            <input asp-for ="IsDone" type="checkbox" class="form-check-input">
+            YES
+        </label>
+
+        <label asp-for ="IsDone" class="form-check-inline">
+            <input asp-for ="IsDone" type="checkbox" class="form-check-input">
+            NO
+        </label>
+    </div>
+
+        <br />
+
+        <button class="btn btn-dark">ADD TASK</button>
 
 </form>

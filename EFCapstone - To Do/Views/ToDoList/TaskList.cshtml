@@ -13,6 +13,6 @@
         <p>Description: @task.Description</p>
         <p>Due Date: @task.DueDate</p>
         <p>Complete? @task.IsDone</p>
-        <a class="text-danger" asp-controller="ToDoList" asp-action="DeleteTask" asp-route-id="@task.TaskID" asp-route-userID="@task.UserID">Delete Dog</a>
+        <a class="text-danger" asp-controller="ToDoList" asp-action="DeleteTask" asp-route-id="@task.TaskID">Delete Dog</a>
     }
 }
