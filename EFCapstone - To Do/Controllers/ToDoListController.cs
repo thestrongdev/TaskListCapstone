@@ -10,8 +10,13 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
-    //route to error page if user clicks task lisk and not logged in
-    //make it look pretty?
+    //1) Make it look pretty?
+    //LATERRRRRR
+    //2) Add sorting functionality
+    //------------by due date
+    //------------by completion status
+    //3) Add searching option by description
+    //4) Complete log in with ASP Identity
 
 
     public class ToDoListController : Controller
@@ -100,11 +105,11 @@ namespace EFCapstone___To_Do.Controllers
                 return View("ErrorPage", errorModel);
             }
 
-            //if (model == null)
-            //{
-            //    return View();
-            //}
- 
+            if (model.UserID == 0)
+            { 
+                return ListItems();
+            }
+
             //BELOW ADDS THE TASK SUBMITTED FROM THE ADD TASK VIEW
             var newTask = new TasksDAL();
             newTask.Description = model.Description;
@@ -121,21 +126,24 @@ namespace EFCapstone___To_Do.Controllers
 
             //ASSEMBLE THE LIST OF TASKS ASSOCIATED WITH THE USER'S ID
             //CAN ALSO BE PUT INTO FUNCTION
-            var viewModel = new TaskListViewModel();
-            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
 
-            viewModel.Tasks = tasks.Select(tasksDAL => new TaskItem()
-            {
-                Description = tasksDAL.Description,
-                DueDate = tasksDAL.DueDate,
-                IsDone = tasksDAL.IsDone,
-                TaskID = tasksDAL.taskID
+            return ListItems();
 
-            }).ToList();
+            //var viewModel = new TaskListViewModel();
+            //var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
 
-            viewModel.UserAccount = _currentUser.CurrentUser.Email;
+            //viewModel.Tasks = tasks.Select(tasksDAL => new TaskItem()
+            //{
+            //    Description = tasksDAL.Description,
+            //    DueDate = tasksDAL.DueDate,
+            //    IsDone = tasksDAL.IsDone,
+            //    TaskID = tasksDAL.taskID
 
-            return View(viewModel);
+            //}).ToList();
+
+            //viewModel.UserAccount = _currentUser.CurrentUser.Email;
+
+            //return View(viewModel);
         }
 
         public IActionResult MarkComplete(int id)
@@ -150,7 +158,7 @@ namespace EFCapstone___To_Do.Controllers
             _toDoListDBContext.SaveChanges();
 
             //WE WANT TO CREATE A NEW LIST OF TASKS TO DISPLAY AFTER UPDATING STATUS ---PUT BELOW IN A FUNCTION!!!
-            return ListItems(id);
+            return ListItems();
         }
 
         public IActionResult DeleteItem(int id) 
@@ -164,7 +172,7 @@ namespace EFCapstone___To_Do.Controllers
             _toDoListDBContext.SaveChanges();
 
             //WE WANT TO CREATE A NEW LIST OF TASKS TO DISPLAY AFTER DELETING
-            return ListItems(id);
+            return ListItems();
         }
 
 
@@ -185,7 +193,7 @@ namespace EFCapstone___To_Do.Controllers
             return task;
         }
 
-        private ViewResult ListItems(int id)
+        private ViewResult ListItems()
         {
             var viewModel = new TaskListViewModel();
             var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
@@ -194,9 +202,11 @@ namespace EFCapstone___To_Do.Controllers
                 .Select(taskDAL => new TaskItem { Description = taskDAL.Description, DueDate = taskDAL.DueDate, TaskID = taskDAL.taskID, UserID = taskDAL.UserID, IsDone = taskDAL.IsDone}).ToList();
 
             viewModel.Tasks = taskViewModelList;
+            viewModel.UserAccount = _currentUser.CurrentUser.Email;
 
             return View("TaskList", viewModel);
         }
+
 
     }
 }

@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" />
 
 
+@*@{ 
+    if (!(@Model.UserID == 0)) {
+        <h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
+        }
+    }*@
+
 <h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
 
 <div>
@@ -15,13 +21,29 @@
     foreach (var task in Model.Tasks)
     {
     <div>
-        <p>Description: @task.Description</p>
-        <p>Due Date: @task.DueDate</p>
-        <p>Complete Status: @task.IsDone</p>
+
+        @{ if (task.IsDone == "YES")
+            {
+
+                <p><s>Description: @task.Description</s></p>
+                <p><s>Due Date: @task.DueDate</s></p>
+                <p><s>Complete Status: @task.IsDone</s></p>
+            }
+            else
+            {
+                <p>Description: @task.Description</p>
+                <p>Due Date: @task.DueDate</p>
+                <p>Complete Status: @task.IsDone</p>
+            }
+        }
+
+
+
+        @*add strike and grey out entire task*@
 
         <div><a class="text-info" asp-controller="ToDoList" asp-action="MarkComplete" asp-route-id="@task.TaskID">Mark Item Complete</a></div>
         <div><a class="text-danger" asp-controller="ToDoList" asp-action="DeleteItem" asp-route-id="@task.TaskID">Delete Task</a></div>
-        <br/>
+        <br />
     </div>
 
     }

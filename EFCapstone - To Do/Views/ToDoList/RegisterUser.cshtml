@@ -7,27 +7,28 @@
 @model EFCapstone___To_Do.Models.ToDoList.RegisterUserViewModel
     <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" />
 
-<form asp-controller="ToDoList" asp-action="ThankYou" method="post">
+    
+        <form asp-controller="ToDoList" asp-action="ThankYou" method="post">
 
-    <br />
+            <br />
 
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-    </div>
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+            </div>
 
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-    </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" placeholder="Please Type Your Password Here" />
+            </div>
 
-    <div>
-        <label asp-for="PasswordConfirmation"></label>
-        <input asp-for="PasswordConfirmation" />
-    </div>
+            <div>
+                <label asp-for="PasswordConfirmation">Password Confirmation:</label>
+                <input asp-for="PasswordConfirmation" type="password" placeholder="Please Confirm Your Password" />
+            </div>
 
-    <br />
+            <br />
 
-    <button class="btn btn-dark">CREATE ACCOUNT</button>
+            <button class="btn btn-dark">CREATE ACCOUNT</button>
 
-</form>
+        </form>

@@ -60,7 +60,7 @@ namespace EFCapstone___To_Do
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=ToDoList}/{action=LogIn}/{id?}");
             });
         }
     }
