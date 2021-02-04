@@ -11,6 +11,7 @@ namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
     //1) Complete log in with ASP Identity
+    //2) Add more front-end
 
 
     public class ToDoListController : Controller
@@ -27,6 +28,19 @@ namespace EFCapstone___To_Do.Controllers
         {
             return View();
         }
+
+        public IActionResult LogOut()
+        {
+            _currentUser.CurrentUser.Email = null;
+            _currentUser.CurrentUser.Password = null;
+            _currentUser.loggedIn = false;
+            _currentUser.CurrentUser.UserID = 0;
+
+            var viewModel = new LogInViewModel();
+            return View("LogIn", viewModel);
+        }
+
+
 
         public IActionResult Search(string searchString)
         {
