@@ -10,13 +10,8 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
-    //1) Make it look pretty?
-    //LATERRRRRR
-    //2) Add sorting functionality
-    //------------by due date
-    //------------by completion status
-    //3) Add searching option by description
-    //4) Complete log in with ASP Identity
+    //1) Add searching option by description
+    //2) Complete log in with ASP Identity
 
 
     public class ToDoListController : Controller
@@ -37,6 +32,50 @@ namespace EFCapstone___To_Do.Controllers
         public IActionResult RegisterUser()
         {
             return View();
+        }
+
+        public IActionResult SortByDueDate()
+        {
+            var viewModel = new TaskListViewModel();
+            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
+
+            var taskViewModelList = tasks
+                .Select(taskDAL => new TaskItem { 
+                    Description = taskDAL.Description, 
+                    DueDate = taskDAL.DueDate, 
+                    TaskID = taskDAL.taskID, 
+                    UserID = taskDAL.UserID, 
+                    IsDone = taskDAL.IsDone })
+                .OrderBy(task => task.DueDate).ToList();
+
+            viewModel.Tasks = taskViewModelList;
+            viewModel.UserAccount = _currentUser.CurrentUser.Email;
+
+            return View("TaskList", viewModel);
+
+        }
+
+        public IActionResult SortByCompletionStatus()
+        {
+            var viewModel = new TaskListViewModel();
+            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
+
+            var taskViewModelList = tasks
+                .Select(taskDAL => new TaskItem
+                {
+                    Description = taskDAL.Description,
+                    DueDate = taskDAL.DueDate,
+                    TaskID = taskDAL.taskID,
+                    UserID = taskDAL.UserID,
+                    IsDone = taskDAL.IsDone
+                })
+                .OrderBy(task => task.IsDone).ToList();
+
+            viewModel.Tasks = taskViewModelList;
+            viewModel.UserAccount = _currentUser.CurrentUser.Email;
+
+            return View("TaskList", viewModel);
+
         }
 
         public IActionResult ThankYou(RegisterUserViewModel model)
@@ -93,24 +132,8 @@ namespace EFCapstone___To_Do.Controllers
             return View(model);
         }
 
-       
-        //ONLY GET TO THIS ACTION AFTER ADDING A TASK
-        public IActionResult TaskList(AddTaskViewModel model)
+        public IActionResult PushTaskToSQL(AddTaskViewModel model)
         {
-
-            //TO ACCESS TASK LIST VIEW FROM THE HEADER LINK (rather than routing from ADD TASK VIEW
-            if (_currentUser.loggedIn == false)
-            {
-                var errorModel = new ErrorPageViewModel();
-                return View("ErrorPage", errorModel);
-            }
-
-            if (model.UserID == 0)
-            { 
-                return ListItems();
-            }
-
-            //BELOW ADDS THE TASK SUBMITTED FROM THE ADD TASK VIEW
             var newTask = new TasksDAL();
             newTask.Description = model.Description;
             newTask.DueDate = model.DueDate;
@@ -124,26 +147,24 @@ namespace EFCapstone___To_Do.Controllers
             _toDoListDBContext.Tasks.Add(newTask);
             _toDoListDBContext.SaveChanges();
 
-            //ASSEMBLE THE LIST OF TASKS ASSOCIATED WITH THE USER'S ID
-            //CAN ALSO BE PUT INTO FUNCTION
-
             return ListItems();
 
-            //var viewModel = new TaskListViewModel();
-            //var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
+        }
 
-            //viewModel.Tasks = tasks.Select(tasksDAL => new TaskItem()
-            //{
-            //    Description = tasksDAL.Description,
-            //    DueDate = tasksDAL.DueDate,
-            //    IsDone = tasksDAL.IsDone,
-            //    TaskID = tasksDAL.taskID
 
-            //}).ToList();
 
-            //viewModel.UserAccount = _currentUser.CurrentUser.Email;
+        //ONLY GET TO THIS ACTION AFTER ADDING A TASK
+        public IActionResult TaskList(AddTaskViewModel model)
+        {
 
-            //return View(viewModel);
+            //TO ACCESS TASK LIST VIEW FROM THE HEADER LINK(rather than routing from ADD TASK VIEW
+            if (_currentUser.loggedIn == false)
+            {
+                var errorModel = new ErrorPageViewModel();
+                return View("ErrorPage", errorModel);
+            }
+
+            return ListItems();
         }
 
         public IActionResult MarkComplete(int id)

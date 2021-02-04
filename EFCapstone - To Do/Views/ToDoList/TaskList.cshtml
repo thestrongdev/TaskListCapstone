@@ -8,14 +8,12 @@
 <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css" />
 
 
-@*@{ 
-    if (!(@Model.UserID == 0)) {
-        <h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
-        }
-    }*@
 
 <h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
-
+<br />
+<div><a class="text-dark" asp-controller="ToDoList" asp-action="SortByDueDate">Sort By Due Date</a></div>
+<div><a class="text-dark" asp-controller="ToDoList" asp-action="SortByCompletionStatus">Sort By Completion Status</a></div>
+<br/>
 <div>
 @{
     foreach (var task in Model.Tasks)
