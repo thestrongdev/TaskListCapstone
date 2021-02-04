@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace EFCapstone___To_Do.Controllers
 {
     //OUTSTANDING ITEMS
-    //1) Add searching option by description
-    //2) Complete log in with ASP Identity
+    //1) Complete log in with ASP Identity
 
 
     public class ToDoListController : Controller
@@ -28,6 +27,34 @@ namespace EFCapstone___To_Do.Controllers
         {
             return View();
         }
+
+        public IActionResult Search(string searchString)
+        {
+            var viewModel = new TaskListViewModel();
+            var tasks = _toDoListDBContext.Tasks.Where(task => task.UserID == _currentUser.CurrentUser.UserID).ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var taskViewModelList = tasks
+                    .Select(taskDAL => new TaskItem
+                    {
+                        Description = taskDAL.Description,
+                        DueDate = taskDAL.DueDate,
+                        TaskID = taskDAL.taskID,
+                        UserID = taskDAL.UserID,
+                        IsDone = taskDAL.IsDone
+                    })
+                    .Where(task => task.Description.Contains(searchString)).ToList();
+
+                viewModel.Tasks = taskViewModelList;
+                viewModel.UserAccount = _currentUser.CurrentUser.Email;
+
+                return View("TaskList", viewModel);
+            }
+
+            return ListItems();
+        }
+
 
         public IActionResult RegisterUser()
         {

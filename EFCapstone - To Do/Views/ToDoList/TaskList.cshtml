@@ -11,8 +11,14 @@
 
 <h2>CURRENT USER ACCOUNT: @Model.UserAccount</h2>
 <br />
-<div><a class="text-dark" asp-controller="ToDoList" asp-action="SortByDueDate">Sort By Due Date</a></div>
-<div><a class="text-dark" asp-controller="ToDoList" asp-action="SortByCompletionStatus">Sort By Completion Status</a></div>
+<div><a class="text-important" asp-controller="ToDoList" asp-action="SortByDueDate">Sort By Due Date</a></div>
+<div><a class="text-important" asp-controller="ToDoList" asp-action="SortByCompletionStatus">Sort By Completion Status</a></div>
+<form asp-controller="ToDoList" asp-action="Search">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <br/>
 <div>
 @{
@@ -29,9 +35,9 @@
             }
             else
             {
-                <p>Description: @task.Description</p>
-                <p>Due Date: @task.DueDate</p>
-                <p>Complete Status: @task.IsDone</p>
+                <p><b>Description:</b> @task.Description</p>
+                <p><b>Due Date:</b> @task.DueDate</p>
+                <p><b>Complete Status:</b> @task.IsDone</p>
             }
         }
 
@@ -39,7 +45,7 @@
 
         @*add strike and grey out entire task*@
 
-        <div><a class="text-info" asp-controller="ToDoList" asp-action="MarkComplete" asp-route-id="@task.TaskID">Mark Item Complete</a></div>
+        <div><a class="text-success" asp-controller="ToDoList" asp-action="MarkComplete" asp-route-id="@task.TaskID">Mark Item Complete</a></div>
         <div><a class="text-danger" asp-controller="ToDoList" asp-action="DeleteItem" asp-route-id="@task.TaskID">Delete Task</a></div>
         <br />
     </div>
