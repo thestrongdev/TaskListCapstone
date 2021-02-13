@@ -121,13 +121,19 @@ namespace EFCapstone___To_Do.Controllers
 
         public IActionResult ThankYou(RegisterUserViewModel model)
         {
-            var newUser = new UsersDAL();
-            newUser.Email = model.Email;
-            newUser.Password = model.Password;
+            if (Validation.ValidatePW(model))
+            {
+                var newUser = new UsersDAL();
+                newUser.Email = model.Email;
+                newUser.Password = model.Password;
 
-            _toDoListDBContext.Users.Add(newUser);
-            _toDoListDBContext.SaveChanges();
-            return View();
+                _toDoListDBContext.Users.Add(newUser);
+                _toDoListDBContext.SaveChanges();
+                return View();
+
+            }
+            return View("RegisterUser", model);
+
         }
 
 

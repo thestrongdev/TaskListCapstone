@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9WtKwTRuXTt4ZMnCfdFdureSJWYN8h0G5X0wg2qbuYW6ARj125w2OW87mJvQ6JGhIEdi3PlwcIm26px1jgFZgg==",
+  "dgSpecHash": "htRqkz3VPK39j3O621NTaMoc/kpmcXPPiGcV69/kN+5pfz9hcGrrRdVrhZ/JcK6xmgEPluzajbXwaNnuE5KgDg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\goods\\source\\repos\\EFCapstone - To Do\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
+  "projectFilePath": "C:\\Users\\goods\\source\\repos\\TaskListCapstone\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\goods\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\goods\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.11\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.11.nupkg.sha512",

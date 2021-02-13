@@ -5798,11 +5798,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\goods\\source\\repos\\EFCapstone - To Do\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
+      "projectUniqueName": "C:\\Users\\goods\\source\\repos\\TaskListCapstone\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
       "projectName": "EFCapstone - To Do",
-      "projectPath": "C:\\Users\\goods\\source\\repos\\EFCapstone - To Do\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
+      "projectPath": "C:\\Users\\goods\\source\\repos\\TaskListCapstone\\EFCapstone - To Do\\EFCapstone - To Do.csproj",
       "packagesPath": "C:\\Users\\goods\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\goods\\source\\repos\\EFCapstone - To Do\\EFCapstone - To Do\\obj\\",
+      "outputPath": "C:\\Users\\goods\\source\\repos\\TaskListCapstone\\EFCapstone - To Do\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\goods\\AppData\\Roaming\\NuGet\\NuGet.Config",
