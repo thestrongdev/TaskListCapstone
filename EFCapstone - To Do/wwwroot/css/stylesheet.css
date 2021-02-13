@@ -10,7 +10,7 @@ h1 {
     color: red;
 }
 
-body h3#currentUser{
+body h3.currentUser{
     color: maroon;
 }
 
