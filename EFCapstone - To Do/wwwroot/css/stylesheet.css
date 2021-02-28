@@ -1,8 +1,9 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
 h1 {
     color: seagreen;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Sriracha', cursive;
     text-align: center;
 }
 
@@ -37,4 +38,27 @@ h2{
 
 body div div#task div.tasklink {
     background-color: lightgray;
+}
+
+
+
+/*To update the below, you must remove the "bg-light" class and "text-dark" class from the following:
+    nav element and within the a element that's within the li element. 
+    These classes have the !important attribute which make it so you can't change the background of the header
+*/
+
+
+/*updates background color of nav bar*/
+nav {
+    background-color: lightgrey !important;
+}
+
+/*updates the fontcolor for title of site in the navigation menu*/
+.navbar-brand {
+    color: lightseagreen !important;
+}
+
+/*updates the fontcolor for the other items in the navigation menu*/
+.nav-link {
+    color: black !important;
 }
